@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'League Gothic Regular';
+    src: url('../assets/leaguegothic-regular-webfont.eot');
+    src: url('../assets/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../assets/leaguegothic-regular-webfont.woff') format('woff'),
+         url('../assets/leaguegothic-regular-webfont.ttf') format('truetype'),
+         url('../assets/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+  font-family: League Gothic Regular;
+  font-size: 48px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #f2f2f2;
+  background-color: #262626;
+}
+
+h1 {
+  font-size: 1.25em;
+}
+
+ul {
+  list-style: none;
+}
+
+label {
+  vertical-align: middle;
+  font-size: 0.8em;
+}
+
+input {
+  vertical-align: middle;
+  border: 1px solid #000;
+  padding: 0.5em;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-color: #f2f2f2;
+}
+
+.img-container {
+  height: 5em;
+  margin-bottom: 0.25em;
+  overflow: hidden;
+}
+
+img {
+  width: 6em;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -1em;
+}
+
+.grid__cell {
+  flex: 0 0 17%;
+  margin-bottom: 1em;
+  padding-left: 1em;
+}
+
+.hidden {
+  display: none;
+}
