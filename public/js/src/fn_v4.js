@@ -32,6 +32,8 @@ var first = function(num) {
   return r.lPartial(take, 0, num);
 };
 
+var mapFirst100 = r.lPartial(r.map, first(100));
+
 var compileTemplates = r.lPartial(r.map, template);
 
 var join = function (separator, list) {
@@ -54,8 +56,8 @@ var setListHtml = r.lPartial(setHtml, '#character-list');
 
 var show = r.compose(setListHtml, buildHtml);
 
-var app = function () {
-  return r.map(r.compose(show, first(100)), fetch());
-};
+var mapShow = r.lPartial(r.map, show);
+
+var app = r.compose(mapShow, mapFirst100, fetch);
 
 app();

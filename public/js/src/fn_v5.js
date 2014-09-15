@@ -48,8 +48,6 @@ var setHtml = r.curry(function(sel, html) {
 
 var show = r.compose(setHtml('#character-list'), buildHtml);
 
-var app = function () {
-  return r.map(r.compose(show, first(100)), fetch());
-};
+var app = r.compose(r.map(show), r.map(first(100)), fetch);
 
 app();
