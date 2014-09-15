@@ -40,6 +40,8 @@ var join = function (separator, list) {
 
 var joinOnNoSpaces = r.lPartial(join, '');
 
+var buildHtml = r.compose(joinOnNoSpaces, compileTemplates);
+
 var getEl = function (selector) {
   return document.querySelector(selector);
 };
@@ -50,10 +52,10 @@ var setHtml = function (sel, html) {
 
 var setListHtml = r.lPartial(setHtml, '#character-list');
 
-var show = r.compose(setListHtml, joinOnNoSpaces, compileTemplates, first(100));
+var show = r.compose(setListHtml, buildHtml);
 
 var app = function () {
-  return r.map(show, fetch());
+  return r.map(r.compose(show, first(100)), fetch());
 };
 
 app();

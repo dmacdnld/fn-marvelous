@@ -48,6 +48,8 @@ var joinOnNoSpaces = function (list) {
   return join(list, '');
 };
 
+var buildHtml = r.compose(joinOnNoSpaces, compileTemplates);
+
 var getEl = function (selector) {
   return document.querySelector(selector);
 };
@@ -60,10 +62,10 @@ var setListHtml = function (html) {
   setHtml('#character-list', html);
 };
 
-var show = r.compose(setListHtml, joinOnNoSpaces, compileTemplates, first100);
+var show = r.compose(setListHtml, buildHtml);
 
 var app = function () {
-  return r.map(show, fetch());
+  return r.map(r.compose(show, first100), fetch());
 };
 
 app();

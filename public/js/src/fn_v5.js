@@ -4,7 +4,7 @@ var Promise = require('./support/promise');
 var template = require ('../../templates/character.handlebars');
 document.querySelector('#version-number').innerHTML = 5;
 
-// Currying
+// Curry
 // ------------------------------------------------------------------
 
 var fetch = function () {
@@ -32,24 +32,24 @@ var first = function(num) {
   return take(0, num);
 };
 
-var compileTemplates = r.map(template);
-
-var join = r.curry(function (separator, list) {
+var join = r.curry(function(separator, list) {
   return list.join(separator);
 });
 
-var getEl = function (selector) {
+var buildHtml = r.compose(join(''), r.map(template));
+
+var getEl = function(selector) {
   return document.querySelector(selector);
 };
 
-var setHtml = r.curry(function (sel, html) {
+var setHtml = r.curry(function(sel, html) {
   getEl(sel).innerHTML = html;
 });
 
-var show = r.compose(setHtml('#character-list'), join(''), compileTemplates, first(100));
+var show = r.compose(setHtml('#character-list'), buildHtml);
 
 var app = function () {
-  return r.map(show, fetch());
+  return r.map(r.compose(show, first(100)), fetch());
 };
 
 app();
