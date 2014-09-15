@@ -11,7 +11,7 @@ Playground for functional concepts using Marvel data.
 
 2.  Install dependencies
 
-        npm install
+        cd fn-marvelous; npm install
 
 3.  Start the server
 
