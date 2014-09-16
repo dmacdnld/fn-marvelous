@@ -7,15 +7,15 @@ Playground for functional concepts using Marvel data.
 
 1.  Clone this repo
 
-        git clone https://github.com/dmacdnld/fn-marvelous.git
+        $ git clone https://github.com/dmacdnld/fn-marvelous.git
 
 2.  Install dependencies
 
-        cd fn-marvelous; npm install
+        $ cd fn-marvelous; npm install
 
 3.  Start the server
 
-        npm start
+        $ npm start
 
 4.  Go to <http://localhost:3000/>
 
@@ -28,6 +28,6 @@ There are iterations of the app in `public/js/src`. They all accomplish the same
 
 2.  Build
 
-        npm run dist
+        $ npm run dist
 
 3.  Refresh the page
