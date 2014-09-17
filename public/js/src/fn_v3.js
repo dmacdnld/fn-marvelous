@@ -7,11 +7,11 @@ document.querySelector('#version-number').innerHTML = 3;
 // Composition
 // ------------------------------------------------------------------
 
-var fetch = function () {
+var fetch = function (resource) {
   var promise = new Promise();
 
   superagent
-    .get('data/characters.json')
+    .get(resource)
     .end(function(res) {
       if (res.ok) {
         promise.resolve(res.body);
@@ -21,6 +21,10 @@ var fetch = function () {
     });
 
   return promise;
+};
+
+var fetchCharacters = function () {
+  return fetch('data/characters.json');
 };
 
 var take = function (begin, end, list) {
@@ -62,10 +66,10 @@ var setListHtml = function (html) {
   setHtml('#character-list', html);
 };
 
-var show = r.compose(setListHtml, buildHtml);
+var showCharacters = r.compose(setListHtml, buildHtml);
 
 var app = function () {
-  return r.map(r.compose(show, first100), fetch());
+  return r.map(r.compose(showCharacters, first100), fetchCharacters());
 };
 
 app();

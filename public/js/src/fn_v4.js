@@ -7,11 +7,11 @@ document.querySelector('#version-number').innerHTML = 4;
 // Partial Application
 // ------------------------------------------------------------------
 
-var fetch = function () {
+var fetch = function (resource) {
   var promise = new Promise();
 
   superagent
-    .get('data/characters.json')
+    .get(resource)
     .end(function(res) {
       if (res.ok) {
         promise.resolve(res.body);
@@ -22,6 +22,8 @@ var fetch = function () {
 
   return promise;
 };
+
+var fetchCharacters = r.lPartial(fetch, 'data/characters.json');
 
 var take = function (begin, end, list) {
   return list.slice(begin, end, list);
@@ -54,10 +56,10 @@ var setHtml = function (sel, html) {
 
 var setListHtml = r.lPartial(setHtml, '#character-list');
 
-var show = r.compose(setListHtml, buildHtml);
+var showCharacters = r.compose(setListHtml, buildHtml);
 
-var mapShow = r.lPartial(r.map, show);
+var mapShowCharacters = r.lPartial(r.map, showCharacters);
 
-var app = r.compose(mapShow, mapFirst100, fetch);
+var app = r.compose(mapShowCharacters, mapFirst100, fetchCharacters);
 
 app();

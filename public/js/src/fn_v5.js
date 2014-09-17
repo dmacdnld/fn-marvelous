@@ -7,11 +7,11 @@ document.querySelector('#version-number').innerHTML = 5;
 // Curry
 // ------------------------------------------------------------------
 
-var fetch = function () {
+var fetch = function (resource) {
   var promise = new Promise();
 
   superagent
-    .get('data/characters.json')
+    .get(resource)
     .end(function(res) {
       if (res.ok) {
         promise.resolve(res.body);
@@ -22,6 +22,8 @@ var fetch = function () {
 
   return promise;
 };
+
+var fetchCharacters = r.lPartial(fetch, 'data/characters.json');
 
 var take = r.curry(function (begin, end, list) {
   return list.slice(begin, end, list);
@@ -46,8 +48,8 @@ var setHtml = r.curry(function(sel, html) {
   getEl(sel).innerHTML = html;
 });
 
-var show = r.compose(setHtml('#character-list'), buildHtml);
+var showCharacters = r.compose(setHtml('#character-list'), buildHtml);
 
-var app = r.compose(r.map(show), r.map(first(100)), fetch);
+var app = r.compose(r.map(showCharacters), r.map(first(100)), fetchCharacters);
 
 app();
