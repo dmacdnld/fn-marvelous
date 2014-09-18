@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./public/js/src/fn_v5.js",
+  entry: "./public/js/src/fn_v6.js",
   output: {
     path: __dirname + "/public/js/dist",
     filename: "fn.js"
