@@ -31,7 +31,7 @@ var take = r.curry(function(begin, end, list) {
   return Array.prototype.slice.call(list, begin, end, list);
 });
 
-var first = (num) {
+var first = function(num) {
   num = num > 1 ? num - 1 : 1;
   return take(0, num);
 };
