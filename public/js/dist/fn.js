@@ -100,24 +100,34 @@
 	  return b.indexOf(a) > -1;
 	});
 
+	var getEventTarget = function(evt) {
+	  return evt.target;
+	};
+
+	var getDataAttr = r.curry(function(attr, el) {
+	  return el.dataset[attr];
+	});
+
+	var set = r.curry(function(obj, prop, val) {
+	  return obj[prop] = val;
+	});
+
+	var searchCriteria = {};
+
+	var updateSearchCriteria = r.compose(r.converge(set(searchCriteria), getDataAttr('searchCriterion'), r.prop('value')), getEventTarget);
+
 	// App-specific
 
 	var fetchCharacters = r.once(r.lPartial(fetch, 'data/characters.json'));
 
 	var showCharacters = r.compose(setHtml('#character-list'), buildHtml);
 
-	var searchCriteria = { name: '' };
-
-	var updateSearchCriteria = function(evt) {
-	  evt.preventDefault();
-	  searchCriteria.name = getEl('#name-input').value;
-	};
-
 	var matchByName = multimethod()
 	                    .dispatch(function() {
 	                      return searchCriteria.name;
 	                    })
 	                    .when('', true)
+	                    .when(undefined, true)
 	                    .default(function(character) {
 	                      return hasSubstr(searchCriteria.name.toLowerCase(), character.name.toLowerCase());
 	                    });
