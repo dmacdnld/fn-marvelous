@@ -9,6 +9,8 @@ document.querySelector('#search-form').classList.remove('hidden');
 // Extend
 // ------------------------------------------------------------------
 
+// General
+
 var fetch = function(resource) {
   var promise = new Promise();
 
@@ -25,13 +27,11 @@ var fetch = function(resource) {
   return promise;
 };
 
-var fetchCharacters = r.once(r.lPartial(fetch, 'data/characters.json'));
-
 var take = r.curry(function(begin, end, list) {
   return Array.prototype.slice.call(list, begin, end, list);
 });
 
-var first = function(num) {
+var first = (num) {
   num = num > 1 ? num - 1 : 1;
   return take(0, num);
 };
@@ -50,11 +50,15 @@ var setHtml = r.curry(function(selector, html) {
   getEl(selector).innerHTML = html;
 });
 
-var showCharacters = r.compose(setHtml('#character-list'), buildHtml);
-
 var hasSubstr = r.curry(function(a, b) {
   return b.indexOf(a) > -1;
 });
+
+// App-specific
+
+var fetchCharacters = r.once(r.lPartial(fetch, 'data/characters.json'));
+
+var showCharacters = r.compose(setHtml('#character-list'), buildHtml);
 
 var searchCriteria = { name: '' };
 

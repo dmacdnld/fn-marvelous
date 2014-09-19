@@ -7,7 +7,9 @@ document.querySelector('#version-number').innerHTML = 3;
 // Composition
 // ------------------------------------------------------------------
 
-var fetch = function (resource) {
+// General
+
+var fetch = function(resource) {
   var promise = new Promise();
 
   superagent
@@ -23,11 +25,7 @@ var fetch = function (resource) {
   return promise;
 };
 
-var fetchCharacters = function () {
-  return fetch('data/characters.json');
-};
-
-var take = function (begin, end, list) {
+var take = function(begin, end, list) {
   return list.slice(begin, end, list);
 };
 
@@ -36,39 +34,45 @@ var first = function(num, list) {
   return take(0, num, list);
 };
 
-var first100 = function (list) {
+var first100 = function(list) {
   return first(100, list);
 };
 
-var compileTemplates = function (list) {
+var compileTemplates = function(list) {
   return r.map(template, list);
 };
 
-var join = function (list, separator) {
+var join = function(list, separator) {
   return list.join(separator);
 };
 
-var joinOnNoSpaces = function (list) {
+var joinOnNoSpaces = function(list) {
   return join(list, '');
 };
 
 var buildHtml = r.compose(joinOnNoSpaces, compileTemplates);
 
-var getEl = function (selector) {
+var getEl = function(selector) {
   return document.querySelector(selector);
 };
 
-var setHtml = function (sel, html) {
+var setHtml = function(sel, html) {
   getEl(sel).innerHTML = html;
 };
 
-var setListHtml = function (html) {
+// App-specific
+
+var fetchCharacters = function() {
+  return fetch('data/characters.json');
+};
+
+var setListHtml = function(html) {
   setHtml('#character-list', html);
 };
 
 var showCharacters = r.compose(setListHtml, buildHtml);
 
-var app = function () {
+var app = function() {
   return r.map(r.compose(showCharacters, first100), fetchCharacters());
 };
 

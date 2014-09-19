@@ -6,7 +6,7 @@ document.querySelector('#version-number').innerHTML = 1;
 // Imperative
 // ------------------------------------------------------------------
 
-var fetch = function () {
+var fetch = function() {
   var promise = new Promise();
 
   superagent
@@ -32,7 +32,7 @@ var show = function(characters) {
   document.querySelector('#character-list').innerHTML = compiledTemplates.join('');
 };
 
-var app = function () {
+var app = function() {
   fetch().then(show);
 };
 

@@ -7,7 +7,9 @@ document.querySelector('#version-number').innerHTML = 5;
 // Curry
 // ------------------------------------------------------------------
 
-var fetch = function (resource) {
+// General
+
+var fetch = function(resource) {
   var promise = new Promise();
 
   superagent
@@ -23,9 +25,7 @@ var fetch = function (resource) {
   return promise;
 };
 
-var fetchCharacters = r.lPartial(fetch, 'data/characters.json');
-
-var take = r.curry(function (begin, end, list) {
+var take = r.curry(function(begin, end, list) {
   return list.slice(begin, end, list);
 });
 
@@ -47,6 +47,10 @@ var getEl = function(selector) {
 var setHtml = r.curry(function(sel, html) {
   getEl(sel).innerHTML = html;
 });
+
+// App-specific
+
+var fetchCharacters = r.lPartial(fetch, 'data/characters.json');
 
 var showCharacters = r.compose(setHtml('#character-list'), buildHtml);
 

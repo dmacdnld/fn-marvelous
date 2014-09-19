@@ -7,7 +7,9 @@ document.querySelector('#version-number').innerHTML = 4;
 // Partial Application
 // ------------------------------------------------------------------
 
-var fetch = function (resource) {
+// General
+
+var fetch = function(resource) {
   var promise = new Promise();
 
   superagent
@@ -23,9 +25,7 @@ var fetch = function (resource) {
   return promise;
 };
 
-var fetchCharacters = r.lPartial(fetch, 'data/characters.json');
-
-var take = function (begin, end, list) {
+var take = function(begin, end, list) {
   return list.slice(begin, end, list);
 };
 
@@ -38,7 +38,7 @@ var mapFirst100 = r.lPartial(r.map, first(100));
 
 var compileTemplates = r.lPartial(r.map, template);
 
-var join = function (separator, list) {
+var join = function(separator, list) {
   return list.join(separator);
 };
 
@@ -46,13 +46,17 @@ var joinOnNoSpaces = r.lPartial(join, '');
 
 var buildHtml = r.compose(joinOnNoSpaces, compileTemplates);
 
-var getEl = function (selector) {
+var getEl = function(selector) {
   return document.querySelector(selector);
 };
 
-var setHtml = function (sel, html) {
+var setHtml = function(sel, html) {
   getEl(sel).innerHTML = html;
 };
+
+// App-specific
+
+var fetchCharacters = r.lPartial(fetch, 'data/characters.json');
 
 var setListHtml = r.lPartial(setHtml, '#character-list');
 
