@@ -15,10 +15,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmacdnld/functional-playground"
+    "url": "https://github.com/dmacdnld/fn-marvelous"
   },
   "bugs": {
-    "url": "https://github.com/dmacdnld/functional-playground/issues"
+    "url": "https://github.com/dmacdnld/fn-marvelous/issues"
   },
   "dependencies": {
     "express": "~4.8.8",
@@ -31,5 +31,9 @@
   },
   "devDependencies": {
     "webpack": "~1.4.0-beta6"
-  }
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "subdomain": "fn-marvelous"
 }
