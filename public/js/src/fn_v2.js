@@ -24,7 +24,10 @@ var fetch = function() {
 };
 
 var show = function(characters) {
-  var top100Characters = characters.slice(0, 99)
+  var top240Characters = characters.slice(0, 24);
+
+  console.log(top100Characters);
+
   var compiledTemplates = r.map(function(character) {
     return template(character);
   }, top100Characters);

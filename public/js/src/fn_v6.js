@@ -22,17 +22,18 @@ var fetch = function(resource) {
       } else {
         promise.reject(res);
       }
+      getEl("#loader").classList.add('hidden');
     });
 
   return promise;
 };
 
 var take = r.curry(function(begin, end, list) {
-  return Array.prototype.slice.call(list, begin, end, list);
+  return Array.prototype.slice.call(list, begin, end);
 });
 
 var first = function(num) {
-  num = num > 1 ? num - 1 : 1;
+  num = num > 1 ? num : 1;
   return take(0, num);
 };
 
@@ -86,7 +87,7 @@ var matchByName = multimethod()
                       return hasSubstr(searchCriteria.name.toLowerCase(), character.name.toLowerCase());
                     });
 
-var app = r.compose(r.map(showCharacters), r.map(first(100)), r.map(r.filter(matchByName)), fetchCharacters);
+var app = r.compose(r.map(showCharacters), r.map(first(24)), r.map(r.filter(matchByName)), fetchCharacters);
 
 var search = r.compose(app, updateSearchCriteria);
 

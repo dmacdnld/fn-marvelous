@@ -26,11 +26,11 @@ var fetch = function(resource) {
 };
 
 var take = r.curry(function(begin, end, list) {
-  return list.slice(begin, end, list);
+  return list.slice(begin, end);
 });
 
 var first = function(num) {
-  num = num > 1 ? num - 1 : 1;
+  num = num > 1 ? num : 1;
   return take(0, num);
 };
 
@@ -54,6 +54,6 @@ var fetchCharacters = r.lPartial(fetch, 'data/characters.json');
 
 var showCharacters = r.compose(setHtml('#character-list'), buildHtml);
 
-var app = r.compose(r.map(showCharacters), r.map(first(100)), fetchCharacters);
+var app = r.compose(r.map(showCharacters), r.map(first(24)), fetchCharacters);
 
 app();

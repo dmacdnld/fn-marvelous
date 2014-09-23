@@ -30,12 +30,12 @@ var take = function(begin, end, list) {
 };
 
 var first = function(num, list) {
-  num = num > 1 ? num - 1 : 1;
+  num = num > 1 ? num : 1;
   return take(0, num, list);
 };
 
-var first100 = function(list) {
-  return first(100, list);
+var first24 = function(list) {
+  return first(24, list);
 };
 
 var compileTemplates = function(list) {
@@ -73,7 +73,7 @@ var setListHtml = function(html) {
 var showCharacters = r.compose(setListHtml, buildHtml);
 
 var app = function() {
-  return r.map(r.compose(showCharacters, first100), fetchCharacters());
+  return r.map(r.compose(showCharacters, first24), fetchCharacters());
 };
 
 app();

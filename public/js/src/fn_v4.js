@@ -30,11 +30,11 @@ var take = function(begin, end, list) {
 };
 
 var first = function(num) {
-  num = num > 1 ? num - 1 : 1;
+  num = num > 1 ? num : 1;
   return r.lPartial(take, 0, num);
 };
 
-var mapFirst100 = r.lPartial(r.map, first(100));
+var mapFirst24 = r.lPartial(r.map, first(24));
 
 var compileTemplates = r.lPartial(r.map, template);
 
@@ -64,6 +64,6 @@ var showCharacters = r.compose(setListHtml, buildHtml);
 
 var mapShowCharacters = r.lPartial(r.map, showCharacters);
 
-var app = r.compose(mapShowCharacters, mapFirst100, fetchCharacters);
+var app = r.compose(mapShowCharacters, mapFirst24, fetchCharacters);
 
 app();

@@ -25,7 +25,7 @@ var fetch = function() {
 var show = function(characters) {
   var compiledTemplates = [];
 
-  for (var i = 0, len = 100; i < len; i++) {
+  for (var i = 0, len = 24; i < len; i++) {
     compiledTemplates.push(template(characters[i]));
   }
 
